@@ -1,0 +1,31 @@
+{
+  "name": "snake-orm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha --timeout 9000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuyuedefeng/snake-orm.git"
+  },
+  "author": "mars",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wuyuedefeng/snake-orm/issues"
+  },
+  "homepage": "https://github.com/wuyuedefeng/snake-orm#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "mysql2": "^1.6.1",
+    "sqlite3": "^4.0.2"
+  },
+  "dependencies": {
+    "snake-utils": "0.0.1"
+  }
+}
