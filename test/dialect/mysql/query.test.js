@@ -32,6 +32,14 @@ describe('Mysql query test', function() {
 	// afterEach(function() {
 	// 	// 在本区块的每个测试用例之后执行
 	// });
+	
+	it('findBy', async function() {
+		let u1 = await User.findBy({username: 'u1', age: 1})
+		expect(u1.username).to.be.equal('u1')
+		
+		let u2 = await User.findBy('username = ? AND age = ?', 'u2', 2)
+		expect(u2.username).to.be.equal('u2')
+	});
 
 	it('where', async function() {
 		let users1 = await User.where({username: 'u1'})
