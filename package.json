@@ -8,7 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha --timeout 9000"
+    "test": "NODE_ENV=test mocha 'test/**/*.@(test.js)' --timeout 9000 --slow 100",
+    "test-mysql": "NODE_ENV=test mocha 'test/dialect/mysql/**/*.@(test.js)' --timeout 9000 --slow 100",
+    "test-sqlite3": "NODE_ENV=test mocha 'test/dialect/sqlite3/**/*.@(test.js)' --timeout 9000 --slow 100"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/wuyuedefeng/snake-orm#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "mysql2": "^1.6.1",
     "sqlite3": "^4.0.2"
