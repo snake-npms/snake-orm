@@ -7,18 +7,18 @@ describe('Sqlite3 query test', function() {
 		// 在本区块的所有测试用例之前执行
 		// both snakeOrm.proxy.runSql and snakeOrm.dialect.runSql are ok!
 		await snakeOrm.proxy.runSql(`DROP TABLE IF EXISTS users`)
-		await snakeOrm.proxy.runSql(`CREATE TABLE IF NOT EXISTS users (username VARCHAR(20), age INTEGER)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users values('u1', 1)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users values('u2', 2)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users values('u3', 3)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users values('u4', 4)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users values('u0', 0)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values('u5', 5)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values('u6', null)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values('u7', 7)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values(null, 8)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values('u9', 9)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users values('ua', 100)`)
+		await snakeOrm.proxy.runSql(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(20), age INTEGER)`)
+		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u1', 1)`)
+		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u2', 2)`)
+		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u3', 3)`)
+		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u4', 4)`)
+		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u0', 0)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u5', 5)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u6', null)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u7', 7)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values(null, 8)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u9', 9)`)
+		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('ua', 100)`)
 	});
 
 	// after(function() {
@@ -33,9 +33,23 @@ describe('Sqlite3 query test', function() {
 	// 	// 在本区块的每个测试用例之后执行
 	// });
 	
+	it('PrimaryKey', async function() {
+		let primaryKeys = await User.getPrimaryKeys()
+		expect(primaryKeys.length > 0).to.be.ok
+		
+		let primaryKey = await User.getPrimaryKey()
+		expect(primaryKey).to.be.equal('id')
+	});
+	
 	it('findBy', async function() {
-		let u1 = await User.findBy({username: 'u1'})
+		let u1 = await User.findBy({username: 'u1', age: 1})
 		expect(u1.username).to.be.equal('u1')
+		
+		let u2 = await User.findBy('username = ? AND age = ?', 'u2', 2)
+		expect(u2.username).to.be.equal('u2')
+		
+		let users3 = await User.findBy({username: 'u--u'})
+		expect(!users3).to.be.ok
 	});
 	
 	it('where', async function() {
@@ -102,7 +116,7 @@ describe('Sqlite3 query test', function() {
 	it('offset', async function() {
 		let users1 = await User.limit(5)
 		let users2 = await User.limit(5).offset(1)
-		expect(users1[0].id).to.be.equal(users2[1].id)
+		expect(users1[1].id).to.be.equal(users2[0].id)
 	});
 	
 	it('after result do', async function() {

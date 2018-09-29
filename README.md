@@ -15,6 +15,7 @@ new SnakeOrm(database, username, password, {dialect: ['mysql'|'sqlite3'], host: 
 
 ### Methods
 > `Class` Methods
+- findBy (options)
 - where (options)
 - order (options)
 - limit (limit)
