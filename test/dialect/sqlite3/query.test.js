@@ -46,6 +46,9 @@ describe('Sqlite3 query test', function() {
 		let users2 = await User.where('username = ?', 'u1')
 		expect(users2.length).to.be.equal(1)
 		expect(users2[0].username).to.be.equal('u1')
+		
+		let users3 = await User.where({username: ['u1', 'u2']})
+		expect(users3.length).to.be.equal(2)
 	});
 	
 	it('order', async function() {

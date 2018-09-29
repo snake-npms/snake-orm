@@ -39,6 +39,9 @@ describe('Mysql query test', function() {
 		
 		let u2 = await User.findBy('username = ? AND age = ?', 'u2', 2)
 		expect(u2.username).to.be.equal('u2')
+		
+		let users3 = await User.where({username: ['u1', 'u2']})
+		expect(users3.length).to.be.equal(2)
 	});
 
 	it('where', async function() {
