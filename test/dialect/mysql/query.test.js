@@ -41,6 +41,19 @@ describe('Mysql query test', function() {
 		expect(primaryKey).to.be.equal('id')
 	});
 	
+	it('find', async function() {
+		let u1 = await User.find(1)
+		expect(u1.id).to.be.equal(1)
+		
+		let errThrow = null
+		try {
+			await User.find(999999999)
+		} catch (err) {
+			errThrow = err
+		}
+		expect(errThrow).to.be.ok
+	});
+	
 	it('findBy', async function() {
 		let u1 = await User.findBy({username: 'u1', age: 1})
 		expect(u1.username).to.be.equal('u1')

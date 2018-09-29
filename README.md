@@ -15,6 +15,7 @@ new SnakeOrm(database, username, password, {dialect: ['mysql'|'sqlite3'], host: 
 
 ### Methods
 > `Class` Methods
+- find (valueOfPrimaryKey) -> it's `[Bomb Method]`
 - findBy (options)
 - where (options)
 - order (options)
@@ -23,6 +24,7 @@ new SnakeOrm(database, username, password, {dialect: ['mysql'|'sqlite3'], host: 
 - count ()
 - sum (field)
 - avg (field)
+
 > `Instance` Methods
 
 ### Log Sql
