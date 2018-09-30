@@ -24,6 +24,8 @@ new SnakeOrm(database, username, password, {dialect: ['mysql'|'sqlite3'], host: 
 - count ()
 - sum (field)
 - avg (field)
+---
+- create(object, blockAfn)
 
 > `Instance` Methods
 
