@@ -28,4 +28,10 @@ describe('Sqlite3 query test', function() {
 		let u1 = await User.create({username: 'zhangsan', age: 20})
 		expect(u1.id && u1.username && u1.age).to.be.ok
 	})
+	
+	it('Update', async function () {
+		let u1 = await User.create({username: 'zhangsan', age: 20})
+		await u1.update({username: 'lisi2'})
+		expect(u1.username).to.be.equal('lisi2')
+	})
 })

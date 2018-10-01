@@ -28,4 +28,10 @@ describe('Mysql query test', function() {
 		expect(u2.id).to.be.equal(2)
 		expect(u3.id).to.be.equal(3)
 	})
+	
+	it('Update', async function () {
+		let u1 = await User.create({username: 'zhangsan', age: 20})
+		await u1.update({username: 'lisi2'})
+		expect(u1.username).to.be.equal('lisi2')
+	})
 })
