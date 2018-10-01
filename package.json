@@ -29,6 +29,7 @@
     "sqlite3": "^4.0.2"
   },
   "dependencies": {
+    "cls-hooked": "^4.2.2",
     "pluralize": "^7.0.0",
     "snake-utils": "0.0.2"
   }

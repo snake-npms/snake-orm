@@ -24,10 +24,10 @@ new SnakeOrm(database, username, password, {dialect: ['mysql'|'sqlite3'], host: 
 - count ()
 - sum (field)
 - avg (field)
----
+- withTransaction(blockAfn)
 - create(object, blockAfn)
-
 > `Instance` Methods
-
+- update(object, blockAfn)
+- save()
 ### Log Sql
 please set `debug` or `logger` -> `true`
