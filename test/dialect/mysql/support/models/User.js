@@ -1,11 +1,13 @@
-const SnakeModel = require('../../../../../lib/model/index')
+const { SnakeModel }  = require('../../../../../index')
 class User extends SnakeModel {
 	static get database () {
 		return 'database_test'
 	}
-	static get table () {
-		return 'users'
-	}
+	
+	// custom table name
+	// static get table () {
+	// 	return 'users'
+	// }
 	
 	constructor (values) {
 		super(...arguments)

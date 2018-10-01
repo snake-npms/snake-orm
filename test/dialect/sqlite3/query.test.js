@@ -2,23 +2,23 @@ const SnakeOrm = require('../../../index')
 const expect = require('chai').expect
 const User = require('./support/models/User')
 describe('Sqlite3 query test', function() {
-	let snakeOrm = new SnakeOrm('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
+	let snakeOrmProxy = SnakeOrm.getOrCreateSnakeOrmProxy('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
 	before(async function() {
 		// 在本区块的所有测试用例之前执行
 		// both snakeOrm.proxy.runSql and snakeOrm.dialect.runSql are ok!
-		await snakeOrm.proxy.runSql(`DROP TABLE IF EXISTS users`)
-		await snakeOrm.proxy.runSql(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(20), age INTEGER)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u1', 1)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u2', 2)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u3', 3)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u4', 4)`)
-		await snakeOrm.proxy.runSql(`INSERT INTO users(username, age) values('u0', 0)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u5', 5)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u6', null)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u7', 7)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values(null, 8)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('u9', 9)`)
-		await snakeOrm.dialect.runSql(`INSERT INTO users(username, age) values('ua', 100)`)
+		await snakeOrmProxy.runSql(`DROP TABLE IF EXISTS users`)
+		await snakeOrmProxy.runSql(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(20), age INTEGER)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('u1', 1)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('u2', 2)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('u3', 3)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('u4', 4)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('u0', 0)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values('u5', 5)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values('u6', null)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values('u7', 7)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values(null, 8)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values('u9', 9)`)
+		await snakeOrmProxy.dialect.runSql(`INSERT INTO users(username, age) values('ua', 100)`)
 	});
 
 	// after(function() {
