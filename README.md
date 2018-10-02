@@ -16,7 +16,7 @@ $ npm install --save sqlite3
 ```
 
 ### Usage
-```base
+```bash
 let SnackeOrm = require('snake-orm')
 SnakeOrm.getOrCreateSnakeOrmProxy(database, username, password, {
     dialect: ['mysql'|'sqlite3'], 

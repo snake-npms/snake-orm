@@ -4,16 +4,26 @@ module.exports = function (snakeOrmProxy, User) {
 		it('Create', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
 			let u2 = await User.create({username: 'zhangsan', age: 20})
-			let u3 = await User.create({username: 'zhangsan', age: 20})
+			let u3 = await User.create({username: 'zhangsan'}, (u) => {
+				u.age = 21
+			})
 			expect(u1.id).to.be.equal(1)
 			expect(u2.id).to.be.equal(2)
-			expect(u3.id).to.be.equal(3)
+			expect(u3.age).to.be.equal(21)
 		})
 		
 		it('Update', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
-			await u1.update({username: 'lisi2'})
+			await u1.update({username: 'lisi2'}, (u) => {u.age = 21})
 			expect(u1.username).to.be.equal('lisi2')
+			expect(u1.age).to.be.equal(21)
+		})
+		
+		it('Save', async function () {
+			let u1 = await User.create({username: 'zhangsan', age: 20})
+			u1.username = 'lisi'
+			await u1.save()
+			expect(u1.username).to.be.equal('lisi')
 		})
 
 		it('withTransaction', async function () {

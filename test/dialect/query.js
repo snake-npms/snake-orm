@@ -34,6 +34,8 @@ module.exports = function (snakeOrmProxy, User) {
 		});
 		
 		it('where', async function() {
+			let users = await User.where({age: 1})
+			
 			let users1 = await User.where({username: 'u1', age: 1})
 			expect(users1.length).to.be.equal(1)
 			expect(users1[0].username).to.be.equal('u1')
@@ -44,6 +46,10 @@ module.exports = function (snakeOrmProxy, User) {
 			
 			let users3 = await User.where({username: ['u1', 'u2']})
 			expect(users3.length).to.be.equal(2)
+			
+			let users5 = await User.where('age > 0')
+			let users6 = await users5.where({username: 'ua'})
+			expect(users6[0].username).to.be.equal('ua')
 		});
 		
 		it('select', async function() {
