@@ -26,6 +26,7 @@ module.exports = function (snakeOrmProxy, User) {
 				let uTransactionId = User._snakeOrmProxy.ns.get('transaction-id')
 				expect(uTransactionId).to.be.equal(transactionId)
 
+				await u.update({username: 'zhangsi'})
 				await u.update({username: 'zhangsi2'})
 				let uTransactionId2 = User._snakeOrmProxy.ns.get('transaction-id')
 				expect(uTransactionId2).to.be.equal(transactionId)
