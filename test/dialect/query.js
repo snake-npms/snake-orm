@@ -69,6 +69,19 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users1[0].username).to.be.equal('ua')
 		});
 		
+		it('having', async function() {
+			let users1 = await User.group('username').select('username')
+			let users2 = await User.group('username', 'age').having('age > 10').select('username', 'age')
+			expect(users1.length > users2.length).to.be.ok
+			let users21 = await User.group('username', 'age').having('age > ?', 10).select('username', 'age')
+			expect(users2.length).to.be.equal(users21.length)
+			
+			
+			let users3 = await User.group('username', 'age').having({age: 100, username: 'ua'}).select('username', 'age')
+			expect(users3.length).to.be.equal(1)
+			expect(users3[0].username).to.be.equal('ua')
+		});
+		
 		it('order', async function() {
 			let users1 = await User.order('username')
 			expect(users1[0].username).to.be.equal(null)
