@@ -60,6 +60,7 @@ module.exports = User
 - avg (field)
 - withTransaction(blockAfn)
 - create(object, blockAfn)
+- updateAll(object)
 > `Instance` Methods
 - update(object, blockAfn)
 - save()

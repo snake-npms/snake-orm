@@ -19,6 +19,15 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(u1.age).to.be.equal(21)
 		})
 		
+		it('UpdateAll', async function () {
+			await User.create({username: 'update-all', age: 18})
+			await User.create({username: 'update-all', age: 19})
+			await User.where({username: 'update-all'}).updateAll({age: 20})
+			let users = await User.where({username: 'update-all'})
+			expect(users[0].age).to.be.equal(20)
+			expect(users[1].age).to.be.equal(20)
+		})
+		
 		it('Save', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
 			u1.username = 'lisi'
