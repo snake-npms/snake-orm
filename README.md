@@ -59,6 +59,7 @@ module.exports = User
 - sum (field)
 - avg (field)
 - withTransaction(blockAfn)
+- findOrCreateBy (object, blockAfn)
 - create(object, blockAfn)
 - updateAll(object)
 > `Instance` Methods
