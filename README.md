@@ -65,5 +65,7 @@ module.exports = User
 > `Instance` Methods
 - update(object, blockAfn)
 - save()
+- increment(field, value)
+- decrement(field, value)
 ### Log Sql
 please set `debug` or `logger` -> `true`

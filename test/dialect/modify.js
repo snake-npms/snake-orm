@@ -27,6 +27,17 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(u1.age).to.be.equal(21)
 		})
 		
+		
+		it('Increment/Decrement', async function () {
+			let u1 = await User.create({username: 'zhangsan', age: 20})
+			await u1.increment('age', 10)
+			console.log('----------------1', u1)
+			expect(u1.age).to.be.equal(30)
+			await u1.decrement('age', 5)
+			console.log('----------------2', u1)
+			expect(u1.age).to.be.equal(25)
+		})
+		
 		it('UpdateAll', async function () {
 			await User.create({username: 'update-all', age: 18})
 			await User.create({username: 'update-all', age: 19})
