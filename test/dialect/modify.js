@@ -22,9 +22,13 @@ module.exports = function (snakeOrmProxy, User) {
 		
 		it('Update', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
+			let count1 = await User.count()
 			await u1.update({username: 'lisi2'}, (u) => {u.age = 21})
+			let count2 = await User.count()
 			expect(u1.username).to.be.equal('lisi2')
 			expect(u1.age).to.be.equal(21)
+			// 测试更新不会创建新数据
+			expect(count1).to.be.equal(count2)
 		})
 		
 		
