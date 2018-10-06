@@ -1,3 +1,4 @@
+const SnakeNamespace = require('snake-namespace')
 const expect = require('chai').expect
 module.exports = function (snakeOrmProxy, User) {
 	describe('Modify test', function() {
@@ -58,20 +59,25 @@ module.exports = function (snakeOrmProxy, User) {
 
 		it('withTransaction', async function () {
 			await User.withTransaction(async () => {
-				let transaction = User._snakeOrmProxy.ns.get('transaction')
-				let transactionId = User._snakeOrmProxy.ns.get('transaction-id')
+				let transaction = SnakeNamespace.get('transaction')
+				let transactionId = SnakeNamespace.get('transaction-id')
 				expect(transaction && transactionId).to.be.ok
 
 				let u = await User.create({username: 'zhangsi', age: 3})
-				let uTransactionId = User._snakeOrmProxy.ns.get('transaction-id')
+				let uTransactionId = SnakeNamespace.get('transaction-id')
 				expect(uTransactionId).to.be.equal(transactionId)
 
 				await u.update({username: 'zhangsi'})
 				await u.update({username: 'zhangsi2'})
-				let uTransactionId2 = User._snakeOrmProxy.ns.get('transaction-id')
+				let uTransactionId2 = SnakeNamespace.get('transaction-id')
 				expect(uTransactionId2).to.be.equal(transactionId)
 			})
 		})
+		
+		it('snake-namespace must blank Object', async function() {
+			let namespace = SnakeNamespace._namesapce
+			expect(Object.keys(namespace).length).to.be.equal(0)
+		});
 		
 	})
 }

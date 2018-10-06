@@ -1,3 +1,4 @@
+const SnakeNamespace = require('snake-namespace')
 const expect = require('chai').expect
 module.exports = function (snakeOrmProxy, User) {
 	describe('modify test', function() {
@@ -149,6 +150,11 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users1.length).to.be.equal(1)
 			let users2 = await users.where({username: 'u2'})
 			expect(users2.length).to.be.equal(1)
+		});
+		
+		it('snake-namespace must blank Object', async function() {
+			let namespace = SnakeNamespace._namesapce
+			expect(Object.keys(namespace).length).to.be.equal(0)
 		});
 	})
 }
