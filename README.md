@@ -1,5 +1,5 @@
 # snake-orm
-Support `Sqlite`, `Mysql`
+Support `Sqlite`, `Mysql`, Dependent `Node Version > 10.4.0`
 
 More Info Please Look the [Doc](https://github.com/snake-npms/snake-orm/wiki)
 
