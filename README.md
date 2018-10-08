@@ -59,6 +59,8 @@ module.exports = User
 - count ()
 - sum (field)
 - avg (field)
+- min (field)
+- max (field)
 - withTransaction(blockAfn)
 - findOrCreateBy (object, blockAfn)
 - create(object, blockAfn)

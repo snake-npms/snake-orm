@@ -152,6 +152,15 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(avgAge).to.be.a('number');
 		});
 		
+		it('min', async function() {
+			let minAge = await User.min('age')
+			expect(minAge).to.be.equal(0);
+		});
+		
+		it('max', async function() {
+			let maxAge = await User.max('age')
+			expect(maxAge > 99).to.be.ok;
+		});
 		
 		it('limit', async function() {
 			let users1 = await User.limit(1)
