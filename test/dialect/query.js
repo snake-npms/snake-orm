@@ -175,6 +175,16 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users1[1].id).to.be.equal(users2[0].id)
 		});
 		
+		it('paginate', async function() {
+			let users1 = await User.paginate(1, 2)
+			let users2 = await User.paginate(2, 2)
+			let users3 = await User.paginate(3, 2)
+			let allUsers = await User.all()
+			expect(users1[0].id == allUsers[0].id).to.be.ok
+			expect(users1[0].id + 2 == users2[0].id).to.be.ok
+			expect(users2[0].id + 2 == users3[0].id).to.be.ok
+		});
+		
 		it('after result do', async function() {
 			let users = await User.where('age > ?', 0)
 			expect(users.length > 5).to.be.ok

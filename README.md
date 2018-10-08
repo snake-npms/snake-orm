@@ -56,6 +56,7 @@ module.exports = User
 - having (options, ...args) 
 - limit (limit)
 - offset (offset)
+- paginate (page, perPage)
 - count ()
 - sum (field)
 - avg (field)
