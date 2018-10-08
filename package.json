@@ -31,6 +31,6 @@
   "dependencies": {
     "cls-hooked": "^4.2.2",
     "pluralize": "^7.0.0",
-    "snake-utils": "0.0.3"
+    "snake-utils": "0.0.4"
   }
 }
