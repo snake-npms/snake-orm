@@ -53,6 +53,30 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users6[0].username).to.be.equal('ua')
 		});
 		
+		it('not where', async function() {
+			let users = await User.not({username: 'u1'})
+			let exist = false
+			users.forEach(u => {
+				if (u.username === 'u1') {
+					exist = true
+				}
+			})
+			expect(exist).to.be.equal(false)
+			
+			users = await User.not({username: ['u1', 'u2']})
+			exist = false
+			users.forEach(u => {
+				if (u.username === 'u1' || u.username === 'u2') {
+					exist = true
+				}
+			})
+			expect(exist).to.be.equal(false)
+			
+			let allCount = await User.count()
+			let users2 = await User.not({username: null})
+			expect(allCount > users2.length && users2.length).to.be.ok
+		});
+		
 		it('select', async function() {
 			let users1 = await User.where({username: 'ua'}).select('username')
 			expect(users1[0].username).to.be.equal('ua')
@@ -129,6 +153,15 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(avgAge).to.be.a('number');
 		});
 		
+		it('min', async function() {
+			let minAge = await User.min('age')
+			expect(minAge).to.be.equal(0);
+		});
+		
+		it('max', async function() {
+			let maxAge = await User.max('age')
+			expect(maxAge > 99).to.be.ok;
+		});
 		
 		it('limit', async function() {
 			let users1 = await User.limit(1)
@@ -141,6 +174,16 @@ module.exports = function (snakeOrmProxy, User) {
 			let users1 = await User.limit(5)
 			let users2 = await User.limit(5).offset(1)
 			expect(users1[1].id).to.be.equal(users2[0].id)
+		});
+		
+		it('paginate', async function() {
+			let users1 = await User.paginate(1, 2)
+			let users2 = await User.paginate(2, 2)
+			let users3 = await User.paginate(3, 2)
+			let allUsers = await User.all()
+			expect(users1[0].id == allUsers[0].id).to.be.ok
+			expect(users1[0].id + 2 == users2[0].id).to.be.ok
+			expect(users2[0].id + 2 == users3[0].id).to.be.ok
 		});
 		
 		it('after result do', async function() {
