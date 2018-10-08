@@ -52,6 +52,30 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users6[0].username).to.be.equal('ua')
 		});
 		
+		it('not where', async function() {
+			let users = await User.not({username: 'u1'})
+			let exist = false
+			users.forEach(u => {
+				if (u.username === 'u1') {
+					exist = true
+				}
+			})
+			expect(exist).to.be.equal(false)
+			
+			users = await User.not({username: ['u1', 'u2']})
+			exist = false
+			users.forEach(u => {
+				if (u.username === 'u1' || u.username === 'u2') {
+					exist = true
+				}
+			})
+			expect(exist).to.be.equal(false)
+			
+			let allCount = await User.count()
+			let users2 = await User.not({username: null})
+			expect(allCount > users2.length && users2.length).to.be.ok
+		});
+		
 		it('select', async function() {
 			let users1 = await User.where({username: 'ua'}).select('username')
 			expect(users1[0].username).to.be.equal('ua')

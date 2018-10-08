@@ -49,6 +49,7 @@ module.exports = User
 - find (valueOfPrimaryKey) -> it's `[Bomb Method]`
 - findBy (options)
 - where (options, ...args)
+- not (options)
 - select (fields) 
 - order (options)
 - group (fields)
