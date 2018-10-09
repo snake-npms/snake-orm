@@ -16,6 +16,16 @@ module.exports = function (snakeOrmProxy) {
 			})
 		});
 		
+		it('test hasMany through', async function() {
+			let user = await snakeOrmProxy._Models.User.find(1)
+			let orderItems = await user.getOrderItems()
+			expect(orderItems.length > 0).to.be.ok
+			for (let item of orderItems) {
+				let order = await item.getOrder()
+				expect(order.userId).to.be.equal(user.id)
+			}
+		});
+		
 		it('test belongsTo', async function() {
 			let user = await snakeOrmProxy._Models.User.find(1)
 			let wallet = await user.getWallet()
