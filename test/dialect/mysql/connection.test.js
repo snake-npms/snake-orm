@@ -2,9 +2,9 @@ const path = require('path')
 const SnakeOrm = require('../../../index')
 const expect = require('chai').expect
 let snakeOrmProxy = SnakeOrm.getOrCreateSnakeOrmProxy('database_test', 'root', null, {dialect: 'mysql', host: 'localhost'})
-snakeOrmProxy.registerModelsWithPath(path.resolve(__dirname, './support/models'))
 describe('Mysql connect TEST', function() {
 	before(async function() {
+		await snakeOrmProxy.registerModelsWithPath(path.resolve(__dirname, './support/models'))
 		// 在本区块的所有测试用例之前执行
 		// both snakeOrm.proxy.runSql and snakeOrm.dialect.runSql are ok!
 		await snakeOrmProxy.runSql(`DROP TABLE IF EXISTS users`)

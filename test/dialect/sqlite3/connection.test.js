@@ -3,8 +3,8 @@ const SnakeOrm = require('../../../index')
 const expect = require('chai').expect
 // let snakeOrm = new SnakeOrm('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
 let snakeOrmProxy = SnakeOrm.getOrCreateSnakeOrmProxy('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
-snakeOrmProxy.registerModelsWithPath(path.resolve(__dirname, './support/models'))
 describe('Sqlite3 connect TEST', function() {
+	snakeOrmProxy.registerModelsWithPath(path.resolve(__dirname, './support/models'))
 	before(async function() {
 		// 在本区块的所有测试用例之前执行
 		// both snakeOrm.proxy.runSql and snakeOrm.dialect.runSql are ok!
