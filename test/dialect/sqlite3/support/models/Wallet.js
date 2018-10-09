@@ -1,5 +1,5 @@
 const { SnakeModel } = require('../../../../../index')
-class Order extends SnakeModel {
+class Wallet extends SnakeModel {
 	static get database () {
 		return 'database_test.sqlite3'
 	}
@@ -17,4 +17,4 @@ class Order extends SnakeModel {
 		super(...arguments)
 	}
 }
-module.exports = Order
+module.exports = Wallet

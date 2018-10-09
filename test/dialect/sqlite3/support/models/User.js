@@ -10,6 +10,7 @@ class User extends SnakeModel {
 	// }
 	
 	static onRegister () {
+		this.hasOne('wallet')
 		this.hasMany('orders')
 	}
 	
