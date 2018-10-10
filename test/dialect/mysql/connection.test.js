@@ -16,6 +16,7 @@ describe('Mysql connect TEST', function() {
 		await snakeOrmProxy.runSql(`CREATE TABLE IF NOT EXISTS order_items (id INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(20), orderId INTEGER)`)
 		await snakeOrmProxy.runSql(`CREATE TABLE IF NOT EXISTS wallets (id INTEGER PRIMARY KEY AUTO_INCREMENT, amount DECIMAL(10,5), userId INTEGER)`)
 		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('c1', 1)`)
+		await snakeOrmProxy.runSql(`INSERT INTO users(username, age) values('c2', 2)`)
 		await snakeOrmProxy.runSql(`INSERT INTO orders(oid, name, userId) values('for1', 'o1', 1)`)
 		await snakeOrmProxy.runSql(`INSERT INTO orders(oid, name, userId) values('for2', 'o2', 1)`)
 		await snakeOrmProxy.runSql(`INSERT INTO order_items(name, orderId) values('for1-good1', 1)`)
