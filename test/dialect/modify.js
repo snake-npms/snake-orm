@@ -70,7 +70,7 @@ module.exports = function (snakeOrmProxy, User) {
 				// console.log(err)
 				expect(!!err).to.be.ok
 			}
-			await User.destroyTableData()
+			await User.destroyAllTableData()
 			let count3 = await User.where({username: 'destroy-all'}).count()
 			expect(count3).to.be.equal(0)
 		})

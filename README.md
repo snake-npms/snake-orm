@@ -66,10 +66,13 @@ module.exports = User
 - findOrCreateBy (object, blockAfn)
 - create(object, blockAfn)
 - updateAll(object)
+- destroyAll()
+- destroyAllTableData()
 > `Instance` Methods
 - update(object, blockAfn)
 - save()
 - increment(field, value)
 - decrement(field, value)
+- destroy()
 ### Log Sql
 please set `debug` or `logger` -> `true`

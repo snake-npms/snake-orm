@@ -6,7 +6,7 @@ class OrderItem extends SnakeModel {
 	
 	// custom table name
 	// static get table () {
-	// 	return 'orders'
+	// 	return 'order_items'
 	// }
 	
 	static onRegister () {

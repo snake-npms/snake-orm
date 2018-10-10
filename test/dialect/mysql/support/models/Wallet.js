@@ -6,7 +6,7 @@ class Wallet extends SnakeModel {
 	
 	// custom table name
 	// static get table () {
-	// 	return 'orders'
+	// 	return 'wallets'
 	// }
 	
 	static onRegister () {
