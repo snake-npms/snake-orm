@@ -49,6 +49,32 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users[1].age).to.be.equal(20)
 		})
 		
+		it('destroy & destroyAll & destroyTableData', async function () {
+			let u = await User.create({username: 'destroy', age: 18})
+			let result = await u.destroy()
+			let ucount = await User.where({username: 'destroy'}).count()
+			expect(result > 0).to.be.ok
+			expect(ucount).to.be.equal(0)
+			
+			await User.create({username: 'destroy-all', age: 18})
+			await User.create({username: 'destroy-all', age: 19})
+			let count1 = await User.where({username: 'destroy-all'}).count()
+			expect(count1 > 0).to.be.ok
+			await User.where({username: 'destroy-all'}).destroyAll()
+			let count2 = await User.where({username: 'destroy-all'}).count()
+			expect(count2).to.be.equal(0)
+			
+			try {
+				await User.destroyAll()
+			} catch (err) {
+				// console.log(err)
+				expect(!!err).to.be.ok
+			}
+			await User.destroyTableData()
+			let count3 = await User.where({username: 'destroy-all'}).count()
+			expect(count3).to.be.equal(0)
+		})
+		
 		it('Save', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
 			u1.username = 'lisi'
