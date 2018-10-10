@@ -77,6 +77,25 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(allCount > users2.length && users2.length).to.be.ok
 		});
 		
+		it('joins', async function() {
+			let users0 = await User.joins('inner join orders on orders.userId = users.id').joins('inner join wallets on wallets.userId = users.id')
+			expect(users0.length > 0).to.be.ok
+			let joUsers0 = await User.joins('orders').joins('wallet')
+			expect(joUsers0.length === users0.length).to.be.ok
+			
+			let users1 = await User.joins('inner join orders on orders.userId = users.id')
+			expect(users1.length > 0).to.be.ok
+			let joUsers1 = await User.joins('orders')
+			expect(joUsers1.length === users1.length).to.be.ok
+
+			let users2 = await User.joins('inner join orders on orders.userId = users.id').distinct()
+			expect(users2.length > 0 && users2.length < users1.length).to.be.ok
+			
+			let joUsers2 = await User.joins('inner join wallets on wallets.userId = users.id')
+			let joUsers3 = await User.joins('wallet').distinct()
+			expect(joUsers2.length >= joUsers3.length).to.be.ok
+		})
+		
 		it('select', async function() {
 			let users1 = await User.where({username: 'ua'}).select('username')
 			expect(users1[0].username).to.be.equal('ua')

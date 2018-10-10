@@ -9,6 +9,12 @@ class User extends SnakeModel {
 	// 	return 'users'
 	// }
 	
+	static onRegister () {
+		this.hasOne('wallet')
+		this.hasMany('orders')
+		this.hasMany('orderItems', {through: 'orders'})
+	}
+	
 	constructor (values) {
 		super(...arguments)
 	}
