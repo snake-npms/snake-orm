@@ -5,6 +5,13 @@ module.exports = function (snakeOrmProxy) {
 			let user = await snakeOrmProxy._Models.User.find(1)
 			let wallet = await user.getWallet()
 			expect(wallet.amount == 10.5).to.be.ok
+			
+			let u2 = await snakeOrmProxy._Models.User.find(2)
+			let wallet2 = await u2.setWallet({amount: 2})
+			expect(wallet2.amount == 2).to.be.ok
+			
+			let wallet3 = await u2.setWallet(null)
+			expect(wallet3).to.be.equal(null)
 		});
 
 		it('test hasMany', async function() {
@@ -22,7 +29,7 @@ module.exports = function (snakeOrmProxy) {
 			let u2Orders = await u2.getOrders()
 			expect(u2Orders.length === 1 && u2Orders[0].name === 'has-many-order').to.be.ok
 
-			await u2.setOrders([new snakeOrmProxy._Models.Order({name: 'has-many-order2'})])
+			await u2.setOrders([{name: 'has-many-order2'}])
 			let u22Orders = await u2.getOrders()
 			expect(u22Orders.length === 1 && u22Orders[0].name === 'has-many-order2').to.be.ok
 
