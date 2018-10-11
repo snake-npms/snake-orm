@@ -3,5 +3,6 @@
   "username": "",
   "password": null,
   "dialect": "sqlite3",
-  "debug": true
+  "debug": true,
+  "autoMigrate": true
 }

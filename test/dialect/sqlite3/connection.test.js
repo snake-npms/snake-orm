@@ -3,10 +3,10 @@ const SnakeOrm = require('../../../index')
 const expect = require('chai').expect
 // let snakeOrm = new SnakeOrm('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
 // let snakeOrmProxy = SnakeOrm.getOrCreateSnakeOrmProxy('database_test.sqlite3', 'root', null, {dialect: 'sqlite3', host: 'localhost', debug: true})
-describe('Sqlite3 connect TEST', async function() {
+describe('Sqlite3 connect TEST', function () {
 	// await snakeOrmProxy.registerModelsWithPath(path.resolve(__dirname, './support/models'))
-	let snakeOrmProxy = await SnakeOrm.initWithSnakeOrmRcFile(path.resolve(__dirname, 'support/.snakeormrc'))
 	before(async function() {
+		let snakeOrmProxy = await SnakeOrm.initWithSnakeOrmRcFile(path.resolve(__dirname, 'support/.snakeormrc'))
 		// 在本区块的所有测试用例之前执行
 		// both snakeOrm.proxy.runSql and snakeOrm.dialect.runSql are ok!
 		await snakeOrmProxy.runSql(`DROP TABLE IF EXISTS users`)
@@ -31,13 +31,14 @@ describe('Sqlite3 connect TEST', async function() {
 	
 	describe('connect TEST', async function() {
 		it('should connect success', function() {
+			let snakeOrmProxy = SnakeOrm.getOrmProxyByDatabase('database_test.sqlite3')
 			let connectOptions = snakeOrmProxy.connectOptions
 			// expect(snakeOrm.proxy).to.be.equal(snakeOrmProxy);
 			expect(connectOptions).to.be.an('object');
 			expect(connectOptions.dialect).to.be.equal('sqlite3');
 			expect(snakeOrmProxy).to.be.equal(SnakeOrm.getOrmProxyByDatabase(connectOptions.database));
-		});
+			
+			require('../association')(snakeOrmProxy)
+		})
 	})
-	
-	require('../association')(snakeOrmProxy)
 })
