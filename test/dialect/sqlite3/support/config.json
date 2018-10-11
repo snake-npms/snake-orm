@@ -1,0 +1,7 @@
+{
+  "database": "database_test.sqlite3",
+  "username": "",
+  "password": null,
+  "dialect": "sqlite3",
+  "debug": true
+}
