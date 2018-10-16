@@ -15,6 +15,11 @@ $ npm install --save mysql2
 $ npm install --save sqlite3
 ```
 
+Easy use like below:
+```
+await User.joins('wallet').where({username: 'zhangsan'}).where('wallets.amount > ?', 100).limit(10).offset(3)
+```
+
 ### Usage
 ```bash
 let SnackeOrm = require('snake-orm')
