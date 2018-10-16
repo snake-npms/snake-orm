@@ -1,22 +1,20 @@
 const { SnakeModel } = require('../../../../../index')
-class User extends SnakeModel {
+class Wallet extends SnakeModel {
 	static get database () {
-		return 'database_test.sqlite3'
+		return 'database_test'
 	}
 	
 	// custom table name
 	// static get table () {
-	// 	return 'users'
+	// 	return 'wallets'
 	// }
 	
 	static onRegister () {
-		this.hasOne('wallet')
-		this.hasMany('orders')
-		this.hasMany('orderItems', {through: 'orders'})
+		this.belongsTo('user')
 	}
 	
 	constructor (values) {
 		super(...arguments)
 	}
 }
-module.exports = User
+module.exports = Wallet

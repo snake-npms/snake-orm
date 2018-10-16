@@ -49,6 +49,32 @@ module.exports = function (snakeOrmProxy, User) {
 			expect(users[1].age).to.be.equal(20)
 		})
 		
+		it('destroy & destroyAll & destroyTableData', async function () {
+			let u = await User.create({username: 'destroy', age: 18})
+			let result = await u.destroy()
+			let ucount = await User.where({username: 'destroy'}).count()
+			expect(result > 0).to.be.ok
+			expect(ucount).to.be.equal(0)
+			
+			await User.create({username: 'destroy-all', age: 18})
+			await User.create({username: 'destroy-all', age: 19})
+			let count1 = await User.where({username: 'destroy-all'}).count()
+			expect(count1 > 0).to.be.ok
+			await User.where({username: 'destroy-all'}).destroyAll()
+			let count2 = await User.where({username: 'destroy-all'}).count()
+			expect(count2).to.be.equal(0)
+			
+			try {
+				await User.destroyAll()
+			} catch (err) {
+				// console.log(err)
+				expect(!!err).to.be.ok
+			}
+			await User.destroyAllTableData()
+			let count3 = await User.where({username: 'destroy-all'}).count()
+			expect(count3).to.be.equal(0)
+		})
+		
 		it('Save', async function () {
 			let u1 = await User.create({username: 'zhangsan', age: 20})
 			u1.username = 'lisi'
@@ -71,6 +97,21 @@ module.exports = function (snakeOrmProxy, User) {
 				let uTransactionId2 = User._snakeOrmProxy.ns.get('transaction-id')
 				expect(uTransactionId2).to.be.equal(transactionId)
 			})
+			
+			let beforeCount = 0
+			try {
+				await User.withTransaction(async () => {
+					beforeCount = await User.count()
+					await User.create({username: 'zhangsi', age: 3})
+					await User.create({username: 'zhangsi2', age: 3})
+					await User.create({username: 'zhangsi3', age: 3})
+					throw new Error('custom Error to test Rollback')
+				})
+			} catch (err) {
+				// console.log(err)
+				let afterCount = await User.count()
+				expect(beforeCount).to.be.equal(afterCount)
+			}
 		})
 		
 	})
