@@ -32,6 +32,6 @@
   "dependencies": {
     "pluralize": "^7.0.0",
     "snake-namespace": "0.0.5",
-    "snake-utils": "0.0.6"
+    "snake-utils": "0.0.7"
   }
 }

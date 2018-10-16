@@ -1,0 +1,8 @@
+{
+  "database": "database_test",
+  "username": "root",
+  "password": null,
+  "dialect": "mysql",
+  "logger": true,
+  "autoMigrate": true
+}

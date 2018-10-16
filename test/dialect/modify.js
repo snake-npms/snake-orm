@@ -98,6 +98,21 @@ module.exports = function (snakeOrmProxy, User) {
 				let uTransactionId2 = SnakeNamespace.get('transaction-id')
 				expect(uTransactionId2).to.be.equal(transactionId)
 			})
+			
+			let beforeCount = 0
+			try {
+				await User.withTransaction(async () => {
+					beforeCount = await User.count()
+					await User.create({username: 'zhangsi', age: 3})
+					await User.create({username: 'zhangsi2', age: 3})
+					await User.create({username: 'zhangsi3', age: 3})
+					throw new Error('custom Error to test Rollback')
+				})
+			} catch (err) {
+				// console.log(err)
+				let afterCount = await User.count()
+				expect(beforeCount).to.be.equal(afterCount)
+			}
 		})
 		
 		it('snake-namespace must blank Object', async function() {
