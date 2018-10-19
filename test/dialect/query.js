@@ -2,10 +2,10 @@ const expect = require('chai').expect
 module.exports = function (snakeOrmProxy, User) {
 	describe('modify test', function() {
 		it('PrimaryKey', async function() {
-			let primaryKeys = await User.getPrimaryKeys()
+			let primaryKeys = User.getPrimaryKeys()
 			expect(primaryKeys.length > 0).to.be.ok
 			
-			let primaryKey = await User.getPrimaryKey()
+			let primaryKey = User.getPrimaryKey()
 			expect(primaryKey).to.be.equal('id')
 		});
 		
@@ -98,17 +98,17 @@ module.exports = function (snakeOrmProxy, User) {
 		it('select', async function() {
 			let users1 = await User.where({username: 'ua'}).select('username')
 			expect(users1[0].username).to.be.equal('ua')
-			expect(users1[0].id).to.be.equal(undefined)
-			expect(users1[0].age).to.be.equal(undefined)
+			expect(users1[0].id).to.be.equal(null)
+			expect(users1[0].age).to.be.equal(null)
 			
 			let users2 = await User.where({username: 'ua'}).select('username', 'age')
 			expect(users2[0].username).to.be.equal('ua')
-			expect(users2[0].id).to.be.equal(undefined)
+			expect(users2[0].id).to.be.equal(null)
 			expect(users2[0].age).to.be.equal(100)
 			
 			let users3 = await User.where({username: 'ua'}).select(['username', 'age'])
 			expect(users3[0].username).to.be.equal('ua')
-			expect(users3[0].id).to.be.equal(undefined)
+			expect(users3[0].id).to.be.equal(null)
 			expect(users3[0].age).to.be.equal(100)
 		});
 		
