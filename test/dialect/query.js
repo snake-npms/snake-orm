@@ -2,10 +2,10 @@ const expect = require('chai').expect
 module.exports = function (snakeOrmProxy, User) {
 	describe('modify test', function() {
 		it('PrimaryKey', async function() {
-			let primaryKeys = await User.getPrimaryKeys()
+			let primaryKeys = User.getPrimaryKeys()
 			expect(primaryKeys.length > 0).to.be.ok
 			
-			let primaryKey = await User.getPrimaryKey()
+			let primaryKey = User.getPrimaryKey()
 			expect(primaryKey).to.be.equal('id')
 		});
 		
