@@ -6,6 +6,7 @@ module.exports = {
 			t.string('phone', {null: false, unique: true})
 			t.string('email')
 			t.integer('age', {default: 0})
+			t.decimal('point', {precision: 10, scale: 2, default: 0})
 			t.timestamps()
 		})
 		await ormProxy.addIndex('admins', 'email', {unique: true})
