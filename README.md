@@ -1,4 +1,5 @@
 # snake-orm
+[![npm](https://img.shields.io/npm/v/snake-orm.svg?style=flat-square)](https://www.npmjs.com/package/snake-orm)
 Support `Sqlite`, `Mysql`
 
 More Info Please Look the [Doc](https://github.com/snake-npms/snake-orm/wiki)
