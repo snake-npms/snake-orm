@@ -2,11 +2,14 @@ const expect = require('chai').expect
 module.exports = function (snakeOrmProxy, User) {
 	describe('Modify test', function() {
 		it('FindOrCreateBy', async function () {
-			let u1 = await User.findOrCreateBy({username: 'find-or-create-by'}, (u) => {u.age = 21})
+			let u1 = await User.where('username = ?', 'find-or-create-by').findOrCreateBy({username: 'find-or-create-by'}, (u) => {u.age = 21})
 			expect(u1.age).to.be.equal(21)
 			
 			let u2 = await User.findOrCreateBy({username: 'find-or-create-by'}, (u) => {u.age = 22})
 			expect(u2.age).to.be.equal(21)
+      
+      let u3 = await User.where('username = ?', 'find-or-create-by').findOrCreateBy({username: 'find-or-create-by'}, (u) => {u.age = 23})
+      expect(u3.age).to.be.equal(21)
 		})
 		
 		it('Create', async function () {
