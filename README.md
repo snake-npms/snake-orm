@@ -1,6 +1,6 @@
 # snake-orm
 [![npm](https://img.shields.io/npm/v/snake-orm.svg?style=flat-square)](https://www.npmjs.com/package/snake-orm)
-Support `Sqlite`, `Mysql`
+> Support `Sqlite`, `Mysql`
 
 More Info Please Look the [Doc](https://github.com/snake-npms/snake-orm/wiki)
 
@@ -62,7 +62,7 @@ module.exports = User
 - having (options, ...args) 
 - limit (limit)
 - offset (offset)
-- paginate (page, perPage)
+- paginate (page = 1, perPage = 20)
 - count ()
 - sum (field)
 - avg (field)
