@@ -32,7 +32,17 @@ module.exports = function (snakeOrmProxy) {
 			await u2.setOrders([{name: 'has-many-order2'}])
 			let u22Orders = await u2.getOrders()
 			expect(u22Orders.length === 1 && u22Orders[0].name === 'has-many-order2').to.be.ok
-
+			
+			let addedOrders = await u2.addOrders({name: 'has_many-order3'})
+			let aU2Orders = await u2.getOrders()
+			expect(aU2Orders.length).to.be.equal(u22Orders.length + 1)
+			expect(addedOrders.length).to.be.equal(1)
+			
+      let droppedOrders = await u2.minusOrders(addedOrders)
+      let mOrderItems = await u2.getOrders()
+      expect(u22Orders.length).to.be.equal(mOrderItems.length)
+      expect(droppedOrders.length).to.be.equal(1)
+			
 			await u2.setOrders([])
 			let u222Orders = await u2.getOrders()
 			expect(u222Orders.length).to.be.equal(0)
@@ -55,6 +65,17 @@ module.exports = function (snakeOrmProxy) {
 			await u2.setOrderItems([new snakeOrmProxy._Models.OrderItem({name: 'has-many-through2'})])
 			let orderItems2 = await u2.getOrderItems()
 			expect(orderItems2.length).to.be.equal(1)
+			
+			
+			let insertedItems = await u2.addOrderItems({name: 'has-many-through3'})
+      let aOrderItems2 = await u2.getOrderItems()
+      expect(aOrderItems2.length).to.be.equal(orderItems2.length + 1)
+      expect(insertedItems.length).to.be.equal(1)
+			
+			let droppedOrderItems = await u2.minusOrderItems(insertedItems)
+			let mOrderItems = await u2.getOrderItems()
+      expect(mOrderItems.length).to.be.equal(orderItems2.length)
+      expect(droppedOrderItems.length).to.be.equal(1)
 			
 			await u2.setOrderItems([])
 			let orderItems3 = await u2.getOrderItems()
