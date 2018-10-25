@@ -53,6 +53,11 @@ module.exports = function (snakeOrmProxy, User) {
 		})
 		
 		it('destroy & destroyAll & destroyTableData', async function () {
+			let su = await User.create({username: 'destroy', age: 18})
+			User.destroy({username: 'destroy'})
+			let sucount = await User.where({username: 'destroy'}).count()
+      expect(sucount === 0).to.be.ok
+			
 			let u = await User.create({username: 'destroy', age: 18})
 			let result = await u.destroy()
 			let ucount = await User.where({username: 'destroy'}).count()
