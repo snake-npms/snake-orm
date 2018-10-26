@@ -4,7 +4,7 @@ module.exports = {
 		await ormProxy.createTable('roles', {}, function (t) {
 			t.string('name')
 			t.string('desc')
-			t.references('admin', {foreignKey: true})
+			t.integer('admin', {foreignKey: true})
 			t.boolean('enabled', {default: false})
 			t.timestamps()
 		})

@@ -13,6 +13,8 @@ class User extends SnakeModel {
 		this.hasOne('wallet')
 		this.hasMany('orders')
 		this.hasMany('orderItems', {through: 'orders'})
+    this.hasMany('friendShips')
+    this.hasMany('friends', {through: 'friendShips', className: 'User', foreignKey: 'friendId'})
 	}
 	
 	constructor (values) {

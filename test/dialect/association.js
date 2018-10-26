@@ -49,6 +49,7 @@ module.exports = function (snakeOrmProxy) {
 		});
 		
 		it('test hasMany through', async function() {
+			let { User } = snakeOrmProxy._Models
 			let user = await snakeOrmProxy._Models.User.find(1)
 			let orderItems = await user.getOrderItems()
 			expect(orderItems.length > 0).to.be.ok
@@ -80,6 +81,27 @@ module.exports = function (snakeOrmProxy) {
 			await u2.setOrderItems([])
 			let orderItems3 = await u2.getOrderItems()
 			expect(orderItems3.length).to.be.equal(0)
+			
+			// has belongs
+			console.log('=========================')
+			let hbU1 = await User.create({username: 'hbu1'})
+			await hbU1.setFriends([])
+			let hbU1Friends = await hbU1.getFriends()
+      expect(hbU1Friends.length).to.be.equal(0)
+      
+      let hbU2 = await User.create({username: 'hbu2'})
+			await hbU1.setFriends([hbU2])
+      hbU1Friends = await hbU1.getFriends()
+      expect(hbU1Friends.length).to.be.equal(1)
+      
+      let hbU3 = await User.create({username: 'hbu3'})
+      await hbU1.addFriends([hbU3])
+      hbU1Friends = await hbU1.getFriends()
+      expect(hbU1Friends.length).to.be.equal(2)
+			
+      await hbU1.minusFriends([hbU2])
+      hbU1Friends = await hbU1.getFriends()
+      expect(hbU1Friends.length).to.be.equal(1)
 		});
 
 		it('test belongsTo', async function() {

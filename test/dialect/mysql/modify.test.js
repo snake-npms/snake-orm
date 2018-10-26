@@ -6,7 +6,8 @@ describe('Mysql Modify test', function() {
 	before(async function() {
 		// 在本区块的所有测试用例之前执行
 		// snakeOrm.proxy === snakeOrmProxy
-		await snakeOrmProxy.runSql(`DROP TABLE IF EXISTS users`)
+    await snakeOrmProxy.runSql(`truncate table friend_ships`)
+		await snakeOrmProxy.runSql(`truncate TABLE users`)
 		await snakeOrmProxy.runSql(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTO_INCREMENT, username VARCHAR(20), age INTEGER)`)
 	});
 	

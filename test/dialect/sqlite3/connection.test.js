@@ -29,17 +29,15 @@ describe('Sqlite3 connect TEST', function () {
       await snakeOrmProxy.runSql(`INSERT INTO wallets(amount, userId) values(10.5, 1)`)
     })
 	});
-	
-	describe('connect TEST', async function() {
-		it('should connect success', function() {
-			let snakeOrmProxy = SnakeOrm.getOrmProxyByDatabase('database_test.sqlite3')
-			let connectOptions = snakeOrmProxy.connectOptions
-			// expect(snakeOrm.proxy).to.be.equal(snakeOrmProxy);
-			expect(connectOptions).to.be.an('object');
-			expect(connectOptions.dialect).to.be.equal('sqlite3');
-			expect(snakeOrmProxy).to.be.equal(SnakeOrm.getOrmProxyByDatabase(connectOptions.database));
-			
-			require('../association')(snakeOrmProxy)
-		})
-	})
+  
+  it('should connect success', function() {
+    let snakeOrmProxy = SnakeOrm.getOrmProxyByDatabase('database_test.sqlite3')
+    let connectOptions = snakeOrmProxy.connectOptions
+    // expect(snakeOrm.proxy).to.be.equal(snakeOrmProxy);
+    expect(connectOptions).to.be.an('object');
+    expect(connectOptions.dialect).to.be.equal('sqlite3');
+    expect(snakeOrmProxy).to.be.equal(SnakeOrm.getOrmProxyByDatabase(connectOptions.database));
+    
+    require('../association')(snakeOrmProxy)
+  })
 })

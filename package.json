@@ -1,6 +1,6 @@
 {
   "name": "snake-orm",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -8,10 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha 'test/**/*.@(test.js)' --timeout 9000 --slow 10",
+    "test": "NODE_ENV=test mocha 'test/**/*.@(test.js)' --timeout 9000 --slow 20",
     "test-mysql": "NODE_ENV=test mocha 'test/dialect/mysql/**/*.@(test.js)' --timeout 9000 --slow 10",
     "test-sqlite3": "NODE_ENV=test mocha 'test/dialect/sqlite3/**/*.@(test.js)' --timeout 9000 --slow 10",
-    "test-tmp": "NODE_ENV=test mocha 'test/dialect/mysql/**/connection.@(test.js)' --timeout 9000 --slow 10"
+    "test-tmp": "NODE_ENV=test mocha 'test/dialect/sqlite3/**/connection.@(test.js)' --timeout 9000 --slow 10"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,6 @@
   "dependencies": {
     "cls-hooked": "^4.2.2",
     "pluralize": "^7.0.0",
-    "snake-utils": "^0.0.14"
+    "snake-utils": "^0.0.15"
   }
 }
