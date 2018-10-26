@@ -11,6 +11,7 @@ class Order extends SnakeModel {
 	
 	static onRegister () {
 		this.belongsTo('user')
+    this.hasMany('orderItems')
 	}
 	
 	constructor (values) {
